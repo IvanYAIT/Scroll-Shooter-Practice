@@ -9,14 +9,14 @@ namespace Player.Weapon
     {
         [SerializeField] private LayerMask enemyLayerMask;
 
-        private int _attacksPerHit;
-        private float _damage;
+        public int HitsPerAttack { get; set; }
+        public float Damage { get; set; }
 
         [Inject]
         public void Construct(WeaponSetting weaponSetting)
         {
-            _attacksPerHit = weaponSetting.AttacksPerHit;
-            _damage = weaponSetting.Damage;
+            HitsPerAttack = weaponSetting.AttacksPerHit;
+            Damage = weaponSetting.Damage;
         }
 
         private void OnTriggerEnter2D(Collider2D collision)
@@ -24,8 +24,8 @@ namespace Player.Weapon
             if (LayerEqualityService.Equal(collision.gameObject.layer, enemyLayerMask))
             {
                 IEnemy enemy = collision.gameObject.GetComponent<IEnemy>();
-                for (int i = 0; i < _attacksPerHit; i++)
-                    enemy.GetDamage(_damage);
+                for (int i = 0; i < HitsPerAttack; i++)
+                    enemy.GetDamage(Damage);
             }
         }
     }

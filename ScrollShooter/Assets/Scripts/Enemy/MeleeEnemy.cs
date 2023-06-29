@@ -12,6 +12,8 @@ namespace Enemy
         [SerializeField] private float damage;
         [SerializeField] private LayerMask playerLayerMask;
 
+        public float Health { get; set; }
+
         private Transform _player;
 
         void Update()
